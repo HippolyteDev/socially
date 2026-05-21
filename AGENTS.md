@@ -9,6 +9,17 @@
 
 ---
 
+## Architecture context
+
+- The current architecture is intentionally transitional and learning-driven.
+- The project originally started as a Next.js-first application, then a separate React + Vite backoffice and Node.js + Express API were added later to practice that stack.
+- Do not treat the duplicated auth/Prisma setup as an accidental inconsistency by default.
+- `lib/auth.ts` and `lib/prisma.ts` are used by the Next.js app.
+- `api/src/auth.ts` and `api/src/prisma.ts` are used by the Express API/backoffice flow.
+- `prisma/` remains at the repository root for now and is shared intentionally.
+- Do not merge, relocate, or “clean up” these boundaries unless the task explicitly asks for an architecture refactor.
+- When touching auth, sessions, Prisma, or backoffice/API code, first identify which runtime is involved: Next.js app, Express API, or React backoffice.
+
 ## Global behavior
 
 - Apply these rules by default for the whole repository.
