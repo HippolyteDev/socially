@@ -7,7 +7,9 @@ export const requireStaff = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const session = await auth.api.getSession();
+  const session = await auth.api.getSession({
+    headers: req.headers as Record<string, string>,
+  });
 
   if (!session?.user.id) {
     return res.status(401).json({ error: "Unauthorized" });
