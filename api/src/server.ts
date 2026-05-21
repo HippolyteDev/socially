@@ -1,7 +1,9 @@
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import { toNodeHandler } from "better-auth/node";
 import { myPrisma } from "./prisma.js";
+import { auth } from "./auth.js";
 
 const app = express();
 const port = Number(process.env.PORT ?? 3005);
@@ -13,6 +15,9 @@ app.use(
     credentials: true,
   }),
 );
+
+app.all("/api/auth/*splat", toNodeHandler(auth));
+
 app.use(express.json());
 
 app.get("/health", async (_req, res) => {
