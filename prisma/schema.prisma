@@ -426,6 +426,7 @@ model StaffProfile {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // URL Car Sauvegarder dans Cloudinary//
+  createdAt        DateTime  @default(now())
   avatarUrl        String?
   avatarPublicid   String?
   deletedAt        DateTime?
