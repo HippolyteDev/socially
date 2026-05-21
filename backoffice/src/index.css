@@ -182,7 +182,7 @@
   }
 
   html {
-    @apply dark font-sans;
+    @apply font-sans;
     background: #070a0f;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
