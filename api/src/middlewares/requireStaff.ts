@@ -13,7 +13,7 @@ export const requireStaff = async (
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const staffProfiles = await myPrisma.staffProfile.findUnique({
+  const staffProfiles = await myPrisma.staffProfile.findFirst({
     where: { userId: session.user.id, deletedAt: null },
     select: { id: true },
   });

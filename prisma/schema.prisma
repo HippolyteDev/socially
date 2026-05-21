@@ -421,6 +421,10 @@ model EmailLog {
 model StaffProfile {
   id               String    @id @default(cuid())
   displayName      String
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   // URL Car Sauvegarder dans Cloudinary//
   avatarUrl        String?
   avatarPublicid   String?
@@ -443,6 +447,7 @@ model User {
   updatedAt     DateTime @updatedAt
 
   profile  UserProfile?
+  staffProfile StaffProfile?
   sessions Session[]
   accounts Account[]
 
