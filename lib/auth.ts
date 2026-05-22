@@ -116,18 +116,13 @@ This link expires in 1 hour.
           };
         },
       },
-      microsoft: {
-        clientId: process.env.MICROSOFT_CLIENT_ID!,
-        clientSecret: process.env.MICROSOFT_CLIENT_SECRET!,
-        tenantId: process.env.MICROSOFT_TENANT_ID!,
-      },
       // ICI ONT RAJOUEZ UN CHAMPS A USER DANS BETTER AUTH POUR SAVOIR SI USER DEVRAS ETRE CREER DANS BACKOFFICE OU PUBLIC //
     },
     user: {
       additionalFields: {
         accountType: {
           type: ["public", "backoffice"],
-          required: true,
+          required: false,
           input: true,
           fieldName: "AccountType",
         },
@@ -182,12 +177,6 @@ This link expires in 1 hour.
                   referrer_domain: typedUser?.trackingData?.referrer_domain,
                   anonymeCreatedAt: anonymousCreatedAt,
                 },
-              });
-            }
-            // Il faut mettre une jointure avec la table User de better auth //
-            if (typedUser.accountType === "backoffice") {
-              await myPrisma.staffProfile.create({
-                data: { displayName: user.name },
               });
             }
           },

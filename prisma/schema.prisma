@@ -80,6 +80,14 @@ enum Intent {
   @@schema("app")
 }
 
+enum StaffRole {
+  VIEWER
+  ADMIN
+  OWNER
+
+  @@schema("app")
+}
+
 // isAi est un champs boolean qui vaut true quand le compte ou le post est générée par IA //
 
 model UserProfile {
@@ -421,13 +429,19 @@ model EmailLog {
 model StaffProfile {
   id               String    @id @default(cuid())
   displayName      String
+  role             StaffRole 
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   // URL Car Sauvegarder dans Cloudinary//
+  createdAt        DateTime  @default(now())
   avatarUrl        String?
   avatarPublicid   String?
   deletedAt        DateTime?
   defineltyDeleted DateTime?
 
-  @@schema("auth")
+  @@schema("app")
 }
 
 
@@ -443,10 +457,11 @@ model User {
   updatedAt     DateTime @updatedAt
 
   profile  UserProfile?
+  staffProfile StaffProfile?
   sessions Session[]
   accounts Account[]
 
-  AccountType  String
+  AccountType  String?
   trackingData Json?
 
   @@unique([email])
