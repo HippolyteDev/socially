@@ -49,5 +49,5 @@ bootstrapRoute.post("/", async (req, res) => {
     return res.status(500).json({ error: `Erreur création owner : ${error}` });
   }
 
-  return res.status(201);
+  return res.status(201).json({ ok: true });
 });

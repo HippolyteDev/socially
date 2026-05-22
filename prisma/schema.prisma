@@ -441,7 +441,7 @@ model StaffProfile {
   deletedAt        DateTime?
   defineltyDeleted DateTime?
 
-  @@schema("auth")
+  @@schema("app")
 }
 
 
