@@ -29,16 +29,40 @@ jobs:
       - name: Génération du client Prisma
         run: npx prisma generate
 
-      - name: Vérification du Lint (ESLint)
+      - name: Vérification du Lint Next.js (ESLint)
         run: npm run lint
 
       - name: Génération des types Next.js
         run: npx next typegen
 
-      - name: Vérification des types (TypeScript)
+      - name: Vérification des types Next.js (TypeScript)
         run: npm run typecheck
 
-      - name: Tentative de Build
+      - name: Installation des dépendances API
+        working-directory: api
+        run: npm ci
+
+      - name: Vérification des types API (TypeScript)
+        working-directory: api
+        run: npm run typecheck
+
+      - name: Build API
+        working-directory: api
+        run: npm run build
+
+      - name: Installation des dépendances Backoffice
+        working-directory: backoffice
+        run: npm ci
+
+      - name: Vérification du Lint Backoffice (ESLint)
+        working-directory: backoffice
+        run: npm run lint
+
+      - name: Build Backoffice
+        working-directory: backoffice
+        run: npm run build
+
+      - name: Tentative de Build Next.js
         run: npm run build
 
       - name: Run unit tests
