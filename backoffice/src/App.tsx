@@ -1,6 +1,14 @@
 import "./App.css";
 import sociallyWhiteLogo from "./assets/socially_white.png";
 import { ShieldCheck } from "lucide-react";
+import { authClient } from "./lib/authClient";
+
+const handleLogin = async () => {
+  await authClient.signIn.social({
+    provider: "microsoft",
+    callbackURL: "/dashboard",
+  });
+};
 
 function App() {
   return (
@@ -16,12 +24,15 @@ shadow-[0_24px_80px_rgba(0,0,0,0.45)] "
           decoding="async"
           className="mt-10 h-35 w-auto object-contain"
         />
-        <h1 className="text-3xl font-bold text-center">Accès au backoffice</h1>
+        <h1 className="text-3xl font-bold text-center">Accès aux Staff</h1>
         <p className="text-sm leading-5 text-muted-foreground mb-1">
           Accès sécurisé au backoffice de Socially
         </p>
         <div className="mt-10 mx-auto h-px w-14 bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_18px_rgba(10,132,255,0.75)]" />
-        <button className="bg-transparent font-semibold mt-5 p-4 inline-flex gap-2 rounded-sm transition-all duration-200 ease-out cursor-pointer hover:bg-primary/10 hover:shadow-[0_0_32px_rgba(10,132,255,0.42)] shadow-[0_0_24px_rgba(10,132,255,0.28)] border border-primary/80 bg-transparent ">
+        <button
+          onClick={handleLogin}
+          className="bg-transparent font-semibold mt-5 p-4 inline-flex gap-2 rounded-sm transition-all duration-200 ease-out cursor-pointer hover:bg-primary/10 hover:shadow-[0_0_32px_rgba(10,132,255,0.42)] shadow-[0_0_24px_rgba(10,132,255,0.28)] border border-primary/80 bg-transparent "
+        >
           <span className="grid size-5 grid-cols-2 gap-0.5">
             <span className="bg-[#f25022]" />
             <span className="bg-[#7fba00]" />
