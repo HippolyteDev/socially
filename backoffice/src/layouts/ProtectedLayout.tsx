@@ -1,11 +1,47 @@
 import { ShieldCheck } from "lucide-react";
 import { authClient } from "../lib/authClient";
 import { Navigate, Outlet } from "react-router";
+import { useEffect, useState } from "react";
 
 export function ProtectedLayout() {
+  const [staffStatus, setStaffStatus] = useState<
+    "checking" | "authorized" | "unauthorized" | "error"
+  >("checking");
   const { data: session, isPending } = authClient.useSession();
 
-  if (isPending) {
+  useEffect(() => {
+    if (isPending) return;
+
+    async function checkStaff() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/staff/me`,
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
+
+        if (response.ok) {
+          setStaffStatus("authorized");
+          return;
+        }
+
+        if (response.status === 401 || response.status === 403) {
+          setStaffStatus("unauthorized");
+          return;
+        }
+
+        setStaffStatus("error");
+      } catch {
+        setStaffStatus("error");
+      }
+    }
+
+    checkStaff();
+  }, [isPending, session]);
+
+  if (isPending || staffStatus === "checking") {
     return (
       <div className="flex flex-col justify-center items-center">
         <div className="relative flex items-center justify-center">
@@ -19,8 +55,16 @@ export function ProtectedLayout() {
     );
   }
 
-  if (!session) {
+  if (!session || staffStatus === "unauthorized") {
     return <Navigate to="/" replace />;
+  }
+
+  if (staffStatus === "error") {
+    return (
+      <p className="flex flex-col items-centers justify-center">
+        Erreur serveur
+      </p>
+    );
   }
 
   return (
