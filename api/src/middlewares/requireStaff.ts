@@ -17,7 +17,7 @@ export const requireStaff = async (
 
   const staffProfiles = await myPrisma.staffProfile.findFirst({
     where: { userId: session.user.id, deletedAt: null },
-    select: { id: true },
+    select: { id: true, displayName: true, role: true, avatarUrl: true },
   });
 
   if (!staffProfiles) {

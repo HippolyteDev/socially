@@ -13,7 +13,6 @@ bootstrapRoute.post("/", async (req, res) => {
   const webHeaders = new Headers(req.headers as Record<string, string>);
   const session = await auth.api.getSession({ headers: webHeaders });
 
-  // 2. Si pas de session = l'utilisateur n'est pas vraiment connecté //
   if (!session) {
     return res.status(401).json({ error: "Non authentifié" });
   }

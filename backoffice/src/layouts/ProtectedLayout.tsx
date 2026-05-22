@@ -7,7 +7,7 @@ export function ProtectedLayout() {
 
   if (isPending) {
     return (
-      <div className="h-screen w-screen bg-zinc-950 flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col justify-center items-center">
         <div className="relative flex items-center justify-center">
           <div className="h-12 w-12 rounded-full border-2 border-zinc-800 border-t-zinc-400 animate-spin" />
           <ShieldCheck className="absolute h-5 w-5 text-zinc-400 animate-pulse" />
@@ -24,7 +24,7 @@ export function ProtectedLayout() {
   }
 
   return (
-    <div className="flex h-screen bg-zinc-950 text-white">
+    <div className="">
       <main className="flex-1 overflow-y-auto">
         <Outlet />
       </main>
