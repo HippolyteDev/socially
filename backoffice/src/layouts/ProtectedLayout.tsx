@@ -45,7 +45,8 @@ export function ProtectedLayout() {
 
   if (isPending || staffStatus === "checking") {
     return (
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex min-h-svh flex-col items-center justify-center">
+        {" "}
         <div className="relative flex items-center justify-center">
           <div className="h-12 w-12 rounded-full border-2 border-zinc-800 border-t-zinc-400 animate-spin" />
           <ShieldCheck className="absolute h-5 w-5 text-zinc-400 animate-pulse" />
@@ -63,7 +64,7 @@ export function ProtectedLayout() {
 
   if (staffStatus === "error") {
     return (
-      <p className="flex flex-col items-centers justify-center">
+      <p className="flex flex-col items-center min-h-screen text-destructive justify-center">
         Erreur serveur
       </p>
     );
