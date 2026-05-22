@@ -42,6 +42,7 @@ bootstrapRoute.post("/", async (req, res) => {
         displayName: session.user.name,
         avatarUrl: session.user.image ?? undefined,
         userId: session.user.id,
+        role: "OWNER",
       },
     });
   } catch (error) {
