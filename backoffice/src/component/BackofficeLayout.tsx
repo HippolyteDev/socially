@@ -1,14 +1,15 @@
 import { Outlet } from "react-router";
 import { BackofficeSidebar } from "./BackofficeSidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export function BackofficeLayout() {
   return (
-    <div className="socially-app-shell flex min-h-svh">
+    <SidebarProvider>
       <BackofficeSidebar />
 
-      <main className="flex min-w-0 flex-1 flex-col overflow-y-auto">
+      <SidebarInset className="flex socially-app-shell min-w-0 flex-1 flex-col overflow-y-auto">
         <Outlet />
-      </main>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
