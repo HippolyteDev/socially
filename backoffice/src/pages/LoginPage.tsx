@@ -11,7 +11,7 @@ export function LoginPage() {
     setIsLoading(true);
     const { error } = await authClient.signIn.social({
       provider: "microsoft",
-      callbackURL: "http://localhost:5173/dashboard",
+      callbackURL: `${import.meta.env.VITE_FRONTEND_URL}/dashboard`,
     });
 
     if (error) {

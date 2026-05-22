@@ -1,8 +1,7 @@
-import express from "express";
-import { Request } from "express";
+import express, { type Request } from "express";
 import { requireStaff } from "../middlewares/requireStaff.js";
 
-type StaffRequest = Request & {
+export type StaffRequest = Request & {
   staff: {
     id: string;
     displayName: string;

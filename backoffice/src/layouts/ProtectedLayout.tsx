@@ -32,6 +32,8 @@ export function ProtectedLayout() {
           return;
         }
 
+        if (isPending || !session) return;
+
         setStaffStatus("error");
       } catch {
         setStaffStatus("error");

@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { auth } from "../auth.js";
 import { myPrisma } from "../prisma.js";
+import { StaffRequest } from "../routes/staff.js";
 
 export const requireStaff = async (
   req: Request,
@@ -15,14 +16,16 @@ export const requireStaff = async (
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const staffProfiles = await myPrisma.staffProfile.findFirst({
+  const staffProfile = await myPrisma.staffProfile.findFirst({
     where: { userId: session.user.id, deletedAt: null },
     select: { id: true, displayName: true, role: true, avatarUrl: true },
   });
 
-  if (!staffProfiles) {
-    return res.status(403).json({ error: "Forbidden" });
+  if (!staffProfile) {
+    return res.status(403).json({ error: "Forbidden", staffProfile });
   }
+
+  (req as StaffRequest).staff = staffProfile;
 
   next();
 };
