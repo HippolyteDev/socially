@@ -452,7 +452,7 @@ model User {
   sessions Session[]
   accounts Account[]
 
-  AccountType  String
+  AccountType  String?
   trackingData Json?
 
   @@unique([email])

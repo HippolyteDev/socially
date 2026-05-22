@@ -122,7 +122,7 @@ This link expires in 1 hour.
       additionalFields: {
         accountType: {
           type: ["public", "backoffice"],
-          required: true,
+          required: false,
           input: true,
           fieldName: "AccountType",
         },
@@ -177,12 +177,6 @@ This link expires in 1 hour.
                   referrer_domain: typedUser?.trackingData?.referrer_domain,
                   anonymeCreatedAt: anonymousCreatedAt,
                 },
-              });
-            }
-            // Il faut mettre une jointure avec la table User de better auth //
-            if (typedUser.accountType === "backoffice") {
-              await myPrisma.staffProfile.create({
-                data: { displayName: user.name },
               });
             }
           },
