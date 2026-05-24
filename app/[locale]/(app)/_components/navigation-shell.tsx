@@ -308,7 +308,7 @@ export function DesktopAppSidebar({
         <Link
           href={profileHref}
           className={cn(
-            "mt-4 flex items-center gap-3 rounded-2xl px-3 py-3 transition outline-none hover:bg-white/[0.03] focus-visible:ring-2 focus-visible:ring-sidebar-ring/60",
+            "mt-4 flex items-center gap-3 rounded-2xl px-3 py-3 transition outline-none hover:bg-white/[0.03] focus-visible:ring-1 focus-visible:ring-sidebar-ring/60",
 
             // La classeName de base est tjr présente, mais bg-white uniquement si isActivePath est true //
             isActivePath(pathname, "/profile") && "bg-white/[0.04]",
