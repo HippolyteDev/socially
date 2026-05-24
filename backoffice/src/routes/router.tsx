@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { LoginPage } from "../pages/LoginPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { ProtectedLayout } from "../layouts/ProtectedLayout";
+import { BackofficeLayout } from "../component/BackofficeLayout";
 
 export const router = createBrowserRouter([
   {
@@ -12,8 +13,8 @@ export const router = createBrowserRouter([
     element: <ProtectedLayout />,
     children: [
       {
-        path: "/dashboard",
-        element: <DashboardPage />,
+        element: <BackofficeLayout />,
+        children: [{ path: "/dashboard", element: <DashboardPage /> }],
       },
       // Tout mes autres pages //
     ],
